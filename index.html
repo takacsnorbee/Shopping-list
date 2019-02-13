@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<main>
+		<title>Shopping List</title>
+		<meta lang="en">
+		<link rel="stylesheet" href="main.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+		<meta name="viewport" content="width=device-width, initial-scale = 1">
+		<link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Rock+Salt" rel="stylesheet">
+	</main>
+	<body>
+		<div id="wrapper">
+			<header>
+				<h1>Your Shopping List Maker...<span></span></h1>
+			</header>
+			<main>
+				<form>
+					<h1>Shopping list</h1>
+					<input id="inputText" type="text" value="" placeholder="New..." required>
+					<input id="addItem" type="button" value="- Add new -">
+					<input id="deleteItem" type="button" value="- Delete -">
+					<button type="button" onclick="window.print()">- Print -</button>
+				</form>
+			 <ul id="list">
+					
+				</ul>
+			</main>
+			<footer>
+				<p>By: Norbert Takács - &copy; 2019</p>
+			</footer>
+		</div>
+		<main id="loginWrapper"> 
+			<div id="loginBackground">
+				<div id="login">	
+					<form>
+						<h2 id="welcome">LOGIN</h2>
+						<input id="username" type="text" value="" placeholder="Username...">
+						<input id="password" type="password" value="" placeholder="Password...">
+						<p id="warning">Invalid username or password! <br> Username and password must be 3-10 character <br> Only number or letter allowed!</p>
+						<button id="loginButton" type="button">Press to login</button>
+					</form>
+				</div>
+			</div>
+		</main>
+		<script>
+			
+			/*LOGIN*/
+			
+			var loginButton = document.getElementById("loginButton");
+			var regx = /^[A-Za-z0-9]{3,10}$/;
+			var validation = false;
+			
+			function validator(){
+				var userName = document.getElementById("username").value;
+				var passwordInput = document.getElementById("password").value;
+				
+				if (regx.test(userName) && regx.test(passwordInput)) {
+					validation = true;
+				} 
+			}
+			
+			loginButton.addEventListener("click", function(){
+				validator();
+				if (validation == true) {
+					document.getElementById("loginWrapper").style.visibility="hidden";
+				} else {
+					document.getElementById("warning").style.visibility="visible";
+				}
+			})
+			
+			
+			/*ADD*/
+			
+			var buttonAdd = document.getElementById("addItem");
+			var input = document.getElementById("inputText")
+			var ul = document.querySelector("ul");
+			
+			function creatListElement(){
+				var li = document.createElement("li");
+					li.appendChild(document.createTextNode(input.value));
+					ul.appendChild(li);
+					input.value="";
+			}
+			
+			buttonAdd.addEventListener("click", function(){
+				if (input.value.length > 3) {
+					creatListElement();
+				}
+			});
+			
+			input.addEventListener("keypress", function(event){
+				if (input.value.length > 3 && event.keyCode === 13) {
+					creatListElement();
+				}
+			});
+			
+			/*DELETE*/
+			
+			var buttonDel = document.getElementById("deleteItem");
+			
+			buttonDel.addEventListener("click", function(){
+				ul.removeChild(ul.childNodes[ul.childNodes.length-1]);
+			});
+			
+		
+		</script>
+	</body>
+</html>
