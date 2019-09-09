@@ -8,6 +8,4 @@ Just a little, cute site.
 - CSS
 - JavaScript
 
-## Live Version
-
-https://takacsnorbee.github.io/shopping-list/
+## Live Version https://takacsnorbee.github.io/Shopping-list/
